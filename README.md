@@ -1,82 +1,118 @@
 # Real-Time CNN Acceleration on PYNQ-Z2 (Zynq-7000 SoC)
 
-## Overview
-This project implements a hardware-accelerated convolutional neural network (CNN) inference system on the PYNQ-Z2 board, which integrates an ARM Cortex-A9 processor with FPGA fabric. Compute-intensive CNN layers are offloaded to the FPGA to achieve real-time or near real-time performance, while the ARM processor handles image preprocessing, control logic, and post-processing. The system demonstrates measurable performance improvements compared to a CPU-only implementation.
+## Overview  
+This project presents a **hardware-accelerated Convolutional Neural Network (CNN) inference system** deployed on the **PYNQ-Z2 (Zynq-7000 SoC)** platform. The design follows a **hardware–software co-design approach**, where compute-intensive CNN layers are offloaded to the FPGA fabric, while the ARM Cortex-A9 processor manages image preprocessing, system control, and post-processing.  
 
-## Objectives
-- Design and implement a CNN inference pipeline on PYNQ-Z2  
-- Accelerate convolutional layers using FPGA fabric via HLS  
-- Compare CPU-only vs FPGA-accelerated performance  
-- Achieve real-time or near real-time inference on embedded hardware  
+The primary goal is to demonstrate **real-time or near real-time inference** for a **2-class image classification task** on an embedded platform, with clear performance gains over a CPU-only implementation. The system highlights the practicality of deploying machine learning inference on resource-constrained edge devices using FPGA acceleration.
 
-## Hardware Platform
-- Board: PYNQ-Z2 (Zynq-7000 XC7Z020)  
-- Processor: Dual-core ARM Cortex-A9  
-- FPGA Fabric: CNN accelerator  
-- Interfaces: AXI Lite, AXI DMA / AXI Stream  
-- Input: Camera / image dataset  
-- Output: Display / console  
+---
 
-## CNN Model
-- Model Type: (Custom CNN / MobileNet / Tiny CNN)  
-- Task: (Image classification / Object detection)  
-- Input Resolution: (e.g., 32×32 / 224×224)  
-- Quantization: (e.g., INT8 / Fixed-point)  
+## Objectives  
+- Design and implement an end-to-end CNN inference pipeline on the PYNQ-Z2 platform  
+- Accelerate compute-intensive CNN layers using FPGA fabric via High-Level Synthesis (HLS)  
+- Integrate ARM–FPGA communication using AXI interfaces and DMA  
+- Compare performance between CPU-only and FPGA-accelerated inference  
+- Achieve real-time or near real-time inference suitable for embedded edge applications  
 
-## System Architecture
-The system follows a hardware–software co-design approach:
-- ARM Processor:
-  - Image capture / dataset loading  
-  - Preprocessing  
-  - Control and post-processing  
-- FPGA Fabric:
-  - Convolution  
-  - Activation  
-  - Pooling  
+---
 
-High-level data flow:  
-Input → ARM → FPGA Accelerator → ARM → Output  
+## Hardware Platform  
+- **Board:** PYNQ-Z2 (Zynq-7000 XC7Z020)  
+- **Processor:** Dual-core ARM Cortex-A9  
+- **FPGA Fabric:** Custom CNN accelerator synthesized using HLS  
+- **Interfaces:** AXI-Lite (control), AXI DMA / AXI-Stream (data transfer)  
+- **Input:** Image dataset (or live camera feed, if applicable)  
+- **Output:** Classification result displayed on console / output visualization  
 
-Detailed architecture: `docs/system_architecture.md`
+---
 
-## Performance Summary
+## CNN Model  
+- **Model Type:** Lightweight custom CNN optimized for FPGA deployment  
+- **Task:** 2-class image classification  
+- **Input Resolution:** As defined by the trained model (e.g., 32×32 or 64×64)  
+- **Quantization:** Fixed-point / INT8 quantization for hardware efficiency  
+- **Deployment:** Trained offline and weights exported for FPGA inference  
 
-| Metric       | CPU Only | FPGA Accelerated | Speedup |
-|--------------|----------|------------------|---------|
-| Latency (ms) | XX       | XX               | XX×     |
-| Throughput   | XX FPS   | XX FPS           | XX×     |
-| Power (W)    | XX       | XX               | XX      |
+---
 
-## FPGA Resource Utilization
+## System Architecture  
+The system follows a **hardware–software co-design paradigm**:
 
-| Resource | Usage |
-|----------|-------|
-| LUTs     | XX %  |
-| BRAM     | XX %  |
-| DSPs     | XX %  |
+**ARM Processor (Processing System – PS):**  
+- Image loading and preprocessing  
+- Control of FPGA accelerator  
+- Post-processing and result interpretation  
 
-## Demo
-Demo video / screenshots:  
+**FPGA Fabric (Programmable Logic – PL):**  
+- Convolution operations  
+- Activation functions  
+- Pooling layers  
+
+**High-Level Data Flow:**  
+
+Detailed architecture diagrams and explanations are provided in:  
+`docs/system_architecture.md`
+
+---
+
+## Performance Summary  
+
+| Metric        | CPU Only | FPGA Accelerated | Speedup |
+|---------------|----------|------------------|---------|
+| Latency (ms)  | XX       | XX               | XX×     |
+| Throughput    | XX FPS   | XX FPS           | XX×     |
+| Power (W)     | XX       | XX               | XX      |
+
+> Replace XX values with your measured results.
+
+---
+
+## FPGA Resource Utilization  
+
+| Resource | Utilization |
+|----------|-------------|
+| LUTs     | XX %        |
+| BRAM     | XX %        |
+| DSPs     | XX %        |
+
+---
+
+## Demo  
+Demo video and screenshots showcasing the working system are provided in:  
 `demo/demo_video_link.txt`
 
-## How to Run
-1. Flash PYNQ image to SD card  
-2. Program FPGA bitstream  
-3. Run Python notebook / ARM application  
-4. Observe inference output  
+---
 
-Detailed steps: `docs/software_design.md`
+## How to Run  
 
-## Results
-Sample outputs and accuracy results are provided in `docs/results.md`.
+1. Flash the PYNQ image to the SD card and boot the PYNQ-Z2 board  
+2. Program the FPGA with the provided bitstream  
+3. Run the Python inference script or notebook on the ARM processor  
+4. Observe classification output and performance metrics  
 
-## Conclusion
-This project demonstrates the effectiveness of FPGA-based CNN acceleration on embedded platforms, achieving significant speedup and improved efficiency compared to CPU-only inference.
+Detailed setup and execution steps are available in:  
+`docs/software_design.md`
 
-## Team
+---
+
+## Results  
+Sample outputs, prediction results, and accuracy metrics are documented in:  
+`docs/results.md`
+
+---
+
+## Conclusion  
+This project demonstrates the **effectiveness of FPGA-based CNN acceleration on embedded platforms**, achieving significant improvements in inference latency and throughput compared to CPU-only execution. The design validates the feasibility of deploying efficient machine learning inference pipelines on edge devices using hardware acceleration.
+
+---
+
+## Team  
 - Name 1  
 - Name 2  
 - Name 3  
 
-## License
-MIT License
+---
+
+## License  
+MIT License  
+
