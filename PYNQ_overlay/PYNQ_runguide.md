@@ -402,7 +402,7 @@ print(os.listdir(wdir))
 ---
 
 ### ❌ Wrong classification result
-- Try a cleaner, well-lit image with a single animal
+- Try a cleaner, well-lit image with a single animal.
 - Check that weights were trained on cats/dogs (not person/object)
 - Verify the image is in RGB/BGR color (not already grayscale)
 
